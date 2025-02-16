@@ -1,0 +1,49 @@
+Открыть командную строку
+
+Устанавливаем расширения
+pip install fastapi uvicorn pillow opencv-python moviepy python-multipart sqlmodel alembic psycopg2-binary
+
+Переходим в папку с кодом
+cd C:\Homeworks\Api3
+
+Работа с Alembic
+alembic init alembic
+alembic revision --autogenerate -m "Initial migration"  (создаем миграцию)
+alembic upgrade head 					(Применяем миграцию)
+
+Открываем сервер
+uvicorn hw3:app --reload
+
+Открыть в браузере
+http://127.0.0.1:8000/docs
+
++ На сервере(в браузере) +
+
+PUT /upload/ - загружает файлы на сервер
+		То есть в папку C:\Homeworks\Api3\files
+
+GET /download/{file_id} - имеет 2 функционала:
+		1) Если указать только file_id - выдаст ссылку на скачивание файла
+		2) Если указать file_id и width,height - покажет изображение, полученного
+							 превью и загрузит его в папку
+							    C:\Homeworks\Api3\previews
+
+GET /files/ - Выдает список из загруженных на сервер файлов, выдавая их 
+									id
+									Тип файла- vid / img
+									размер файла : int
+									путь файла
+									время загрузки файла 
+									      - дата и время
+
+Информацию про закгруженные файлы можно посмотреть в базе данных postgres
+				Для этого рекомендуется использовать pgAdmin
+					Вход:    postgres
+					Паротль: qwerty123
+				Cмотреть таблицу с базы данных можно по адресу
+				PostgreSQL->Databases->media_db->Schemas->Tables->file.info
+				нажать правой кнопкой мыши и выбрать вью/едит дата -> ол ровс
+
+
+
+
